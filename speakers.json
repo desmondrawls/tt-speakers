@@ -6,5 +6,13 @@
   {
     "id": 2,
     "name": {"first": "Grace", "last": "Hopper"}
+  },
+  {
+    "id": 1,
+    "name": {"first": "Linus", "last": "Torvalds"}
+  },
+  {
+    "id": 2,
+    "name": {"first": "Ada", "last": "Lovelace"}
   }
 ]

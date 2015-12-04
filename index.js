@@ -1,6 +1,6 @@
 var express = require('express')
 var app = express()
-
+var morgan = require('morgan')
 var fs = require('fs')
 var _ = require('lodash')
 var speakers = []
@@ -14,14 +14,12 @@ fs.readFile('speakers.json', {encoding: 'utf8'}, function(err, data){
     })
 })
 
+app.set('views', './views')
+app.set('view engine', 'jade')
+app.use(morgan('combined'))
+
 app.get('/', function(req, res){
-    var buffer = ''
-
-    speakers.forEach(function(speaker){
-        buffer += '<a href="/speakers/' + speaker.id + '">' + speaker.name.full + '</a><br>'
-    })
-
-    res.send(buffer)
+    res.render('index', {speakers: speakers})
 })
 
 app.get('/speakers/:id', function(req, res){

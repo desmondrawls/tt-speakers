@@ -1,0 +1,10 @@
+doctype html
+html(lang="en")
+    head
+        title = "Speakers Index"
+    body
+        h1 Speakers
+        ul
+            each speaker in speakers
+                li
+                    a(href='/speakers/' + speaker.id)= speaker.name.full
