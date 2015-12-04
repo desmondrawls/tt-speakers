@@ -1,18 +1,22 @@
 [
   {
     "id": 1,
-    "name": {"first": "Isaac", "last": "Asimov"}
+    "name": {"first": "Isaac", "last": "Asimov"},
+    "email": "isaac@asimov.com"
   },
   {
     "id": 2,
-    "name": {"first": "Grace", "last": "Hopper"}
+    "name": {"first": "Grace", "last": "Hopper"},
+    "email": "grace@hopper.com"
   },
   {
     "id": 1,
-    "name": {"first": "Linus", "last": "Torvalds"}
+    "name": {"first": "Linus", "last": "Torvalds"},
+    "email": "linus@torvalds.com"
   },
   {
     "id": 2,
-    "name": {"first": "Ada", "last": "Lovelace"}
+    "name": {"first": "Ada", "last": "Lovelace"},
+    "email": "ada@lovelace.com"
   }
 ]

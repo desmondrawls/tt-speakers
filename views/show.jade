@@ -2,5 +2,46 @@ doctype html
 html(lang="en")
     head
         title = "Speaker Show"
+        script(src="/jquery/jquery.js")
+        link(rel='stylesheet', href='/stylesheets/main.css')
     body
         h1= speaker.name.full
+        div.nav
+            a(href='/')= "Back to Speakers List"
+
+        dl
+            dt= "First Name"
+                dd.view= speaker.name.first
+                dd.edit
+                    input#first-name(type="text" value= speaker.name.first)
+            br
+            dt= "Last Name"
+                dd.view= speaker.name.last
+                dd.edit
+                    input#last-name(type="text" value= speaker.name.last)
+            br
+            dt= "Email"
+                dd.view= speaker.email
+                dd.edit
+                    input#email(type="text" value= speaker.email)
+            br
+            dt
+                dd.edit
+                    input(type="submit" value="Save" onClick="save()")
+                    input(type="submit" value="Cancel" onClick="cancel()")
+            br
+
+
+        p
+            a(href='#' onclick='edit()')= "Edit "
+            a(href='#' onclick='delete()')= "Delete"
+
+        script.
+            function edit() {
+                $('.view').hide()
+                $('.edit').show()
+            }
+            function cancel() {
+                $('.edit').hide()
+                $('.view').show()
+            }

@@ -17,6 +17,8 @@ fs.readFile('speakers.json', {encoding: 'utf8'}, function(err, data){
 app.set('views', './views')
 app.set('view engine', 'jade')
 app.use(morgan('combined'))
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/stylesheets', express.static('stylesheets'));
 
 app.get('/', function(req, res){
     res.render('index', {speakers: speakers})
