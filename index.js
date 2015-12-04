@@ -27,7 +27,7 @@ app.get('/speakers/:id', function(req, res){
     var speaker = _.find(speakers, function(speaker){
         return speaker.id == id
     })
-    res.send(speaker.name.full)
+    res.render('show', {speaker: speaker})
 })
 
 var server = app.listen(3000, function(){
