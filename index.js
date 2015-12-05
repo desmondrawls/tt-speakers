@@ -21,22 +21,6 @@ app.use(function (req, res, next) {
     next()
 })
 
-app.get('/format/tester', function(req, res){
-    res.format({
-        text: function(){
-            res.send('text');
-        },
-
-        html: function(){
-            res.send('html');
-        },
-
-        json: function(){
-            res.send('json');
-        }
-    });
-})
-
 app.get('/', function(req, res){
     Speaker.find({}, function(err, speakers){
         res.render('index', {speakers: speakers})
