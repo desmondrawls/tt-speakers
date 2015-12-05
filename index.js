@@ -1,10 +1,10 @@
 var express = require('express')
 var app = express()
-var morgan = require('morgan')
 var path = require('path')
 var fs = require('fs')
 var _ = require('lodash')
 var bodyParser = require('body-parser')
+var morgan = require('morgan')
 
 app.set('views', './views')
 app.set('view engine', 'jade')
@@ -41,6 +41,22 @@ function saveSpeaker (speakerId, data) {
     fs.writeFileSync(fp, JSON.stringify(data, null, 2), {encoding: 'utf8'})
 }
 
+app.get('/format/tester', function(req, res){
+    res.format({
+        text: function(){
+            res.send('text');
+        },
+
+        html: function(){
+            res.send('html');
+        },
+
+        json: function(){
+            res.send('json');
+        }
+    });
+})
+
 app.get('/', function(req, res){
     var speakers = [];
     fs.readdir('speakers', function (err, files) {
@@ -53,6 +69,11 @@ app.get('/', function(req, res){
             })
         })
     })
+})
+
+app.all('/speakers/:id', function(req, res, next){
+    console.log(req.method, 'for', req.params.id)
+    next()
 })
 
 app.get('/speakers/:id', verifySpeaker, function(req, res){
