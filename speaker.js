@@ -6,17 +6,27 @@ var router = express.Router({
     mergeParams: true
 })
 
-router.all('/', function(req, res, next){
+router.all('/', function (req, res, next) {
     console.log(req.method, 'for', req.params.id)
     next()
 })
 
-router.get('/', helpers.verifySpeaker, function(req, res){
-    var speaker = helpers.getSpeaker(req.params.id)
-    res.render('show', {speaker: speaker})
+router.get('/', helpers.verifySpeaker, function (req, res) {
+    res.format({
+        html: function () {
+            var speaker = helpers.getSpeaker(req.params.id)
+            res.render('show', {speaker: speaker})
+        },
+
+        json: function () {
+            var readableSpeaker = fs.createReadStream('./speakers/id' + req.params.id + '.json')
+            readableSpeaker.pipe(res)
+        }
+    });
+
 })
 
-router.put('/', helpers.verifySpeaker, function(req, res){
+router.put('/', helpers.verifySpeaker, function (req, res) {
     var speaker = helpers.getSpeaker(req.params.id)
     console.log(req.body.firstName)
     speaker.name.first = req.body.firstName
