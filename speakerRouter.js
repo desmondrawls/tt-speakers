@@ -1,5 +1,7 @@
 var express = require('express')
 var helpers = require('./helpers')
+var jsonTemplates = require('./collectionJsonTemplates')
+
 
 var router = express.Router({
     mergeParams: true
@@ -21,13 +23,13 @@ router.get('/', helpers.verifySpeaker, function (req, res) {
 })
 
 router.put('/', helpers.verifySpeaker, function (req, res) {
-    Speaker.findByIdAndUpdate(req.params.id, req.body, function(err, speaker){
+    Speaker.findByIdAndUpdate(req.params.id, req.body, function (err, speaker) {
         respondWithSpeaker(res, speaker)
     })
 })
 
 router.delete('/', helpers.verifySpeaker, function (req, res) {
-    Speaker.findByIdAndRemove(req.params.id, function(err, speaker){
+    Speaker.findByIdAndRemove(req.params.id, function (err, speaker) {
         res.sendStatus(200)
     })
 })
@@ -38,7 +40,8 @@ function respondWithSpeaker(res, speaker) {
             res.render('show', {speaker: speaker})
         },
         json: function () {
-            res.send(speaker)
+            res.send(JSON.stringify(jsonTemplates.item(jsonTemplates.speaker(speaker))))
+
         }
     })
 }

@@ -7,7 +7,6 @@ var router = express.Router({
 
 var Speaker = require('./db').Speaker
 
-
 router.use(function (req, res, next) {
     console.log('---------------')
     console.log(req.method, ' for speakers collection')
