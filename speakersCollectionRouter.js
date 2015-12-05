@@ -1,5 +1,6 @@
 var express = require('express')
 var helpers = require('./helpers')
+var jsonTemplates = require('./collectionJsonTemplates')
 
 var router = express.Router({
     mergeParams: true
@@ -31,7 +32,7 @@ function respondWithSpeakers(res, speakers) {
             res.render('index', {speakers: speakers})
         },
         json: function () {
-            res.send(speakers)
+            res.send(JSON.stringify(jsonTemplates.layout(jsonTemplates.speakers(speakers))))
         }
     })
 }
