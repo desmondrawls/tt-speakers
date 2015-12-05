@@ -5,7 +5,7 @@ html(lang="en")
         script(src="/jquery/jquery.js")
         link(rel='stylesheet', href='/stylesheets/main.css')
     body
-        h1= speaker.name.full
+        h1= speaker.name.first + ' ' + speaker.name.last
         div.nav
             a(href='/')= "Back to Speakers List"
 
@@ -27,14 +27,14 @@ html(lang="en")
             br
             dt
                 dd.edit
-                    input(type='submit' value='Save' onClick='save("#{speaker.id}")')
+                    input(type='submit' value='Save' onClick='save("#{speaker.speakerId}")')
                     input(type='submit' value='Cancel' onClick='cancel()')
             br
 
 
         p
             a(href='#' onclick='edit()')= "Edit "
-            a(href='#' onclick='drop("#{speaker.id}")')= "Drop"
+            a(href='#' onclick='drop("#{speaker.speakerId}")')= "Drop"
 
         script.
             function edit() {
@@ -52,8 +52,10 @@ html(lang="en")
                 $.ajax('/speakers/' + speakerId, {
                     method: 'PUT',
                     data: {
-                        firstName: $('#first-name').val(),
-                        lastName: $('#last-name').val(),
+                        name:{
+                            first: $('#first-name').val(),
+                            last: $('#last-name').val(),
+                        },
                         email: $('#email').val(),
                     },
                     complete: function () {

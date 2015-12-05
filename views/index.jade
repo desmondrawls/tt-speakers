@@ -7,4 +7,4 @@ html(lang="en")
         ul
             each speaker in speakers
                 li
-                    a(href='/speakers/' + speaker.id)= speaker.name.full
+                    a(href='/speakers/' + speaker.speakerId)= speaker.name.first + ' ' + speaker.name.last

@@ -7,6 +7,8 @@ var bodyParser = require('body-parser')
 var morgan = require('morgan')
 var helpers = require('./helpers')
 
+var Speaker = require('./db').Speaker
+
 app.set('views', './views')
 app.set('view engine', 'jade')
 app.use(morgan('combined'))
@@ -31,16 +33,8 @@ app.get('/format/tester', function(req, res){
 })
 
 app.get('/', function(req, res){
-    var speakers = [];
-    fs.readdir('speakers', function (err, files) {
-        files.forEach(function (file) {
-            fs.readFile(path.join(__dirname, 'speakers', file), {encoding: 'utf8'}, function (err, data) {
-                var speaker = JSON.parse(data)
-                speaker.name.full = _.startCase(speaker.name.first + ' ' + speaker.name.last)
-                speakers.push(speaker)
-                if (speakers.length === files.length) res.render('index', {speakers: speakers})
-            })
-        })
+    Speaker.find({}, function(err, speakers){
+        res.render('index', {speakers: speakers})
     })
 })
 
