@@ -17,14 +17,24 @@ router.use(function (req, res, next) {
 
 router.get('/', function(req, res){
     Speaker.find({}, function(err, speakers){
-        res.render('index', {speakers: speakers})
+        respondWithSpeakers(res, speakers)
     })
 })
 
 router.post('/', function(req, res){
-    var speaker = new Speaker(req.body)
-    speaker.save()
+    new Speaker(req.body).save()
     res.redirect('/')
 })
+
+function respondWithSpeakers(res, speakers) {
+    res.format({
+        html: function () {
+            res.render('index', {speakers: speakers})
+        },
+        json: function () {
+            res.send(speakers)
+        }
+    })
+}
 
 module.exports = router

@@ -16,20 +16,13 @@ router.use(function (req, res, next) {
 
 router.get('/', helpers.verifySpeaker, function (req, res) {
     Speaker.findById(req.params.id, function (err, speaker) {
-        res.format({
-            html: function () {
-                res.render('show', {speaker: speaker})
-            },
-            json: function () {
-                res.send(speaker)
-            }
-        })
+        respondWithSpeaker(res, speaker)
     })
 })
 
 router.put('/', helpers.verifySpeaker, function (req, res) {
     Speaker.findByIdAndUpdate(req.params.id, req.body, function(err, speaker){
-        res.render('show', {speaker: speaker})
+        respondWithSpeaker(res, speaker)
     })
 })
 
@@ -38,6 +31,17 @@ router.delete('/', helpers.verifySpeaker, function (req, res) {
         res.sendStatus(200)
     })
 })
+
+function respondWithSpeaker(res, speaker) {
+    res.format({
+        html: function () {
+            res.render('show', {speaker: speaker})
+        },
+        json: function () {
+            res.send(speaker)
+        }
+    })
+}
 
 module.exports = router
 

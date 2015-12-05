@@ -10,7 +10,6 @@ db.once('open', function (callback) {
 })
 
 var speakerSchema = mongoose.Schema({
-    speakerId: String,
     email: String,
     name: {
         first: String,
