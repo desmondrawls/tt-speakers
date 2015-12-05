@@ -2,9 +2,62 @@ doctype html
 html(lang="en")
     head
         title = "Speakers Index"
+        script(src="/jquery/jquery.js")
+        link(rel='stylesheet', href='/stylesheets/main.css')
     body
         h1 Speakers
         ul
             each speaker in speakers
                 li
-                    a(href='/speakers/' + speaker.speakerId)= speaker.name.first + ' ' + speaker.name.last
+                    a(href='/' + speaker.id)= speaker.name.first + ' ' + speaker.name.last
+
+        p.old
+            a(href='#' onclick='showNew()')= "New"
+
+        dl.new
+            dt= "First Name"
+            dd
+                input#first-name(type="text")
+            br
+            dt= "Last Name"
+            dd
+                input#last-name(type="text")
+            br
+            dt= "Email"
+            dd
+                input#email(type="text")
+            br
+            dt
+                dd
+                    input(type='submit' value='Save' onClick='save()')
+                    input(type='submit' value='Cancel' onClick='cancel()')
+            br
+
+        script.
+            function showNew() {
+                $('.old').hide()
+                $('.new').show()
+            }
+
+            function cancel() {
+                $('.new').hide()
+                $('.old').show()
+            }
+
+            function save() {
+                console.log("saving")
+                $.ajax('/', {
+                    method: 'POST',
+                    data: {
+                        email: $('#email').val(),
+                        name: {
+                            first: $('#first-name').val(),
+                            last: $('#last-name').val(),
+                        }
+                    },
+                    complete: function () {
+                        cancel()
+                        location.reload()
+                    }
+                })
+            }

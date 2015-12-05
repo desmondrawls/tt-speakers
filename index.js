@@ -16,6 +16,11 @@ app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/stylesheets', express.static('stylesheets'));
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(function (req, res, next) {
+    console.log(req.method, 'for speaker ', req.params.id, ' at ' + req.path)
+    next()
+})
+
 app.get('/format/tester', function(req, res){
     res.format({
         text: function(){
@@ -38,10 +43,16 @@ app.get('/', function(req, res){
     })
 })
 
-var speakerRouter = require('./speaker')
-app.use('/speakers/:id', speakerRouter)
+app.post('/', function(req, res){
+    var speaker = new Speaker(req.body)
+    speaker.save()
+    res.redirect('/')
+})
 
-app.get('/speakers/error/:id', function(req, res){
+var speakerRouter = require('./speaker')
+app.use('/:id', speakerRouter)
+
+app.get('/error/:id', function(req, res){
     res.status(404).send('No speaker with id ' + req.params.id + ' found')
 })
 
