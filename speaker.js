@@ -6,8 +6,8 @@ var router = express.Router({
     mergeParams: true
 })
 
-router.all('/', function (req, res, next) {
-    console.log(req.method, 'for', req.params.id)
+router.use(function (req, res, next) {
+    console.log(req.method, 'for speaker ', req.params.id, ' at ' + req.path)
     next()
 })
 
@@ -23,7 +23,6 @@ router.get('/', helpers.verifySpeaker, function (req, res) {
             readableSpeaker.pipe(res)
         }
     });
-
 })
 
 router.put('/', helpers.verifySpeaker, function (req, res) {
