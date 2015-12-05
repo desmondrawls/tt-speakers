@@ -34,7 +34,7 @@ html(lang="en")
 
         p
             a(href='#' onclick='edit()')= "Edit "
-            a(href='#' onclick='delete("#{speaker.id}")')= "Delete"
+            a(href='#' onclick='drop("#{speaker.id}")')= "Drop"
 
         script.
             function edit() {
@@ -62,7 +62,7 @@ html(lang="en")
                     }
                 })
             }
-            function del(speakerId) {
+            function drop(speakerId) {
                     $.ajax('/speakers/' + speakerId, {
                     method: 'DELETE',
                     complete: function () {

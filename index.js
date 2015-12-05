@@ -23,9 +23,21 @@ function getSpeaker (speakerId) {
     return speaker
 }
 
+function verifySpeaker (req, res, next) {
+    var speakerFilePath = getSpeakerFilePath(req.params.id)
+
+    fs.exists(speakerFilePath, function(yes){
+        if (yes) {
+            next()
+        } else {
+            res.redirect('/speakers/error/' + req.params.id)
+        }
+    })
+}
+
 function saveSpeaker (speakerId, data) {
     var fp = getSpeakerFilePath(speakerId)
-    fs.unlinkSync(fp) // delete the file
+    fs.unlinkSync(fp)
     fs.writeFileSync(fp, JSON.stringify(data, null, 2), {encoding: 'utf8'})
 }
 
@@ -43,12 +55,16 @@ app.get('/', function(req, res){
     })
 })
 
-app.get('/speakers/:id', function(req, res){
+app.get('/speakers/:id', verifySpeaker, function(req, res){
     var speaker = getSpeaker(req.params.id)
     res.render('show', {speaker: speaker})
 })
 
-app.put('/speakers/:id', function(req, res){
+app.get('/speakers/error/:id', function(req, res){
+    res.status(404).send('No speaker with id ' + req.params.id + ' found')
+})
+
+app.put('/speakers/:id', verifySpeaker, function(req, res){
     var speaker = getSpeaker(req.params.id)
     console.log(req.body.firstName)
     speaker.name.first = req.body.firstName
@@ -56,6 +72,12 @@ app.put('/speakers/:id', function(req, res){
     speaker.email = req.body.email
     saveSpeaker(speaker.id, speaker)
     res.render('show', {speaker: speaker})
+})
+
+app.delete('/speakers/:id', verifySpeaker, function (req, res) {
+    var filePath = getSpeakerFilePath(req.params.id)
+    fs.unlinkSync(filePath)
+    res.sendStatus(200)
 })
 
 var server = app.listen(3000, function(){
