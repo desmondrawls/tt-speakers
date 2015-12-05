@@ -27,21 +27,46 @@ html(lang="en")
             br
             dt
                 dd.edit
-                    input(type="submit" value="Save" onClick="save()")
-                    input(type="submit" value="Cancel" onClick="cancel()")
+                    input(type='submit' value='Save' onClick='save("#{speaker.id}")')
+                    input(type='submit' value='Cancel' onClick='cancel()')
             br
 
 
         p
             a(href='#' onclick='edit()')= "Edit "
-            a(href='#' onclick='delete()')= "Delete"
+            a(href='#' onclick='delete("#{speaker.id}")')= "Delete"
 
         script.
             function edit() {
                 $('.view').hide()
                 $('.edit').show()
             }
+
             function cancel() {
                 $('.edit').hide()
                 $('.view').show()
+            }
+
+            function save(speakerId) {
+                console.log("saving")
+                $.ajax('/speakers/' + speakerId, {
+                    method: 'PUT',
+                    data: {
+                        firstName: $('#first-name').val(),
+                        lastName: $('#last-name').val(),
+                        email: $('#email').val(),
+                    },
+                    complete: function () {
+                        cancel()
+                        location.reload()
+                    }
+                })
+            }
+            function del(speakerId) {
+                    $.ajax('/speakers/' + speakerId, {
+                    method: 'DELETE',
+                    complete: function () {
+                        location = '/'
+                    }
+                })
             }
