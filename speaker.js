@@ -14,19 +14,17 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', helpers.verifySpeaker, function (req, res) {
-    res.format({
-        html: function () {
-            var speakerId = req.params.id
-            Speaker.findOne({'speakerId': speakerId}, function(err, speaker){
+    var speakerId = req.params.id
+    Speaker.findOne({'speakerId': speakerId}, function (err, speaker) {
+        res.format({
+            html: function () {
                 res.render('show', {speaker: speaker})
-            })
-        },
-
-        json: function () {
-            var readableSpeaker = fs.createReadStream('./speakers/id' + req.params.id + '.json')
-            readableSpeaker.pipe(res)
-        }
-    });
+            },
+            json: function () {
+                res.send(speaker)
+            }
+        })
+    })
 })
 
 router.put('/', helpers.verifySpeaker, function (req, res) {
