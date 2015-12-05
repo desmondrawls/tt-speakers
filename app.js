@@ -24,6 +24,6 @@ var speakersCollectionRouter = require('./speakersCollectionRouter')
 app.use('/', speakersCollectionRouter)
 
 var server = app.listen(3000, function(){
-    console.log('Speakers server running at htttp://localhost:' + server.address().port)
+    console.log('Speakers server running at http://localhost:' + server.address().port)
 })
 
