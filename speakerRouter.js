@@ -40,7 +40,7 @@ function respondWithSpeaker(res, speaker) {
             res.render('show', {speaker: speaker})
         },
         json: function () {
-            res.send(JSON.stringify(jsonTemplates.layout(jsonTemplates.speakers(speaker))))
+            res.send(JSON.stringify(jsonTemplates.layout(jsonTemplates.speakers([speaker]))))
 
         }
     })
