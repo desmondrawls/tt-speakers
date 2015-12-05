@@ -28,19 +28,17 @@ router.get('/', helpers.verifySpeaker, function (req, res) {
 })
 
 router.put('/', helpers.verifySpeaker, function (req, res) {
-    var speaker = helpers.getSpeaker(req.params.id)
-    console.log(req.body.firstName)
-    speaker.name.first = req.body.firstName
-    speaker.name.last = req.body.lastName
-    speaker.email = req.body.email
-    helpers.saveSpeaker(speaker.id, speaker)
-    res.render('show', {speaker: speaker})
+    var speakerId = req.params.id
+    Speaker.findOneAndUpdate({'speakerId': speakerId}, req.body, function(err, speaker){
+        res.render('show', {speaker: speaker})
+    })
 })
 
 router.delete('/', helpers.verifySpeaker, function (req, res) {
-    var filePath = helpers.getSpeakerFilePath(req.params.id)
-    fs.unlinkSync(filePath)
-    res.sendStatus(200)
+    var speakerId = req.params.id
+    Speaker.findOneAndRemove({'speakerId': speakerId}, function(err, speaker){
+        res.sendStatus(200)
+    })
 })
 
 module.exports = router

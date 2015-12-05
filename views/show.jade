@@ -52,11 +52,12 @@ html(lang="en")
                 $.ajax('/speakers/' + speakerId, {
                     method: 'PUT',
                     data: {
+                        speakerId: speakerId,
+                        email: $('#email').val(),
                         name:{
                             first: $('#first-name').val(),
                             last: $('#last-name').val(),
-                        },
-                        email: $('#email').val(),
+                        }
                     },
                     complete: function () {
                         cancel()
