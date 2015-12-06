@@ -48,6 +48,7 @@ function speaker(speaker) {
         {
             href: 'http://localhost:3000/' + speaker.id,
             data: [
+                {name: 'id', value: speaker.id, prompt: 'ID'},
                 {name: 'first-name', value: speaker.name.first, prompt: 'First name'},
                 {name: 'last-name', value: speaker.name.last, prompt: 'Last name'},
                 {name: 'email', value: speaker.email, prompt: 'Email'},
