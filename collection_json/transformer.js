@@ -27,7 +27,6 @@ function layout(items) {
                     {name: 'first-name', value: '', prompt: 'First name'},
                     {name: 'last-name', value: '', prompt: 'Last name'},
                     {name: 'email', value: '', prompt: 'Email'},
-
                 ]
             }
 
@@ -49,8 +48,8 @@ function speaker(speaker) {
             href: 'http://localhost:3000/' + speaker.id,
             data: [
                 {name: 'id', value: speaker.id, prompt: 'ID'},
-                {name: 'first-name', value: speaker.first_name, prompt: 'First name'},
-                {name: 'last-name', value: speaker.last_name, prompt: 'Last name'},
+                {name: 'first_name', value: speaker.first_name, prompt: 'First name'},
+                {name: 'last_name', value: speaker.last_name, prompt: 'Last name'},
                 {name: 'email', value: speaker.email, prompt: 'Email'},
             ],
             links: [

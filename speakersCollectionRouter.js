@@ -1,6 +1,6 @@
 var express = require('express')
 var helpers = require('./helpers')
-var jsonTemplates = require('./collectionJsonTemplates')
+var jsonTemplates = require('./collection_json/transformer')
 
 var router = express.Router({
     mergeParams: true
@@ -10,7 +10,7 @@ var Speaker = require('./db').Speaker
 
 router.use(function (req, res, next) {
     console.log('---------------')
-    console.log(req.method, ' for speakers collection')
+    console.log(req.method, ' for speakers collection', ' with', req.body)
     console.log('---------------')
     next()
 })

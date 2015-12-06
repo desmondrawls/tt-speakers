@@ -1,6 +1,7 @@
 var express = require('express')
 var helpers = require('./helpers')
-var jsonTemplates = require('./collectionJsonTemplates')
+var jsonTransformer = require('./collection_json/transformer')
+var jsonTranslater = require('./collection_json/translater')
 
 
 var router = express.Router({
@@ -22,9 +23,11 @@ router.get('/', helpers.verifySpeaker, function (req, res) {
     })
 })
 
-router.put('/', helpers.verifySpeaker, function (req, res) {
+router.put('/', function (req, res) {
     console.log("updating with ", req.body)
-    Speaker.findByIdAndUpdate(req.params.id, req.body, function (err, speaker) {
+    var speaker = jsonTranslater.speakers(req.body)[0]
+    Speaker.findByIdAndUpdate(req.params.id, speaker, function (err, speaker) {
+        //THIS IS THE OLD SPEAKER NOT THE UPDATED ONE
         respondWithSpeaker(res, speaker)
     })
 })

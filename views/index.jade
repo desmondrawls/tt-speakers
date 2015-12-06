@@ -49,10 +49,8 @@ html(lang="en")
                     method: 'POST',
                     data: {
                         email: $('#email').val(),
-                        name: {
-                            first: $('#first-name').val(),
-                            last: $('#last-name').val(),
-                        }
+                        first_name: $('#first-name').val(),
+                        last_name: $('#last-name').val()
                     },
                     complete: function () {
                         cancel()

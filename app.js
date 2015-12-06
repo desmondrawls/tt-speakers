@@ -13,6 +13,7 @@ app.use(morgan('combined'))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/stylesheets', express.static('stylesheets'));
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 var errorRouter = require('./errorRouter')
 app.use('/error/', errorRouter)

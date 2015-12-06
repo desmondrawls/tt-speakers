@@ -48,13 +48,20 @@ html(lang="en")
             }
 
             function save(speakerId) {
+                var updatedSpeaker =
+                    [
+                        {name: 'email', prompt: 'Email', value: $('#email').val()},
+                        {name: 'first-name', prompt: 'First Name', value: $('#first-name').val()},
+                        {name: 'last-name', prompt: 'Last Name', value: $('#last-name').val()}
+                    ]
                 console.log("saving")
+                console.log('update', updatedSpeaker)
                 $.ajax('/' + speakerId, {
                     method: 'PUT',
                     data: {
-                        email: $('#email').val(),
-                        first_name: $('#first-name').val(),
-                        last_name: $('#last-name').val()
+                        'email': 'email',
+                        'first_name': 'first',
+                        'last_name': 'last'
                     },
                     complete: function () {
                         cancel()
