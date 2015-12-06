@@ -23,6 +23,7 @@ router.get('/', helpers.verifySpeaker, function (req, res) {
 })
 
 router.put('/', helpers.verifySpeaker, function (req, res) {
+    console.log("updating with ", req.body)
     Speaker.findByIdAndUpdate(req.params.id, req.body, function (err, speaker) {
         respondWithSpeaker(res, speaker)
     })

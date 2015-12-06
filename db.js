@@ -11,9 +11,7 @@ db.once('open', function (callback) {
 
 var speakerSchema = mongoose.Schema({
     email: String,
-    name: {
-        first: String,
-        last: String
-    }
+    first_name: String,
+    last_name: String
 })
 exports.Speaker = mongoose.model('Speaker', speakerSchema)

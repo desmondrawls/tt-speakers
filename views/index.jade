@@ -9,8 +9,7 @@ html(lang="en")
         ul
             each speaker in speakers
                 li
-                    a(href='/' + speaker.id)= speaker.name.first + ' ' + speaker.name.last
-
+                    a(href='/' + speaker.id)= speaker.first_name + ' ' + speaker.last_name
         p.old
             a(href='#' onclick='showNew()')= "New"
 

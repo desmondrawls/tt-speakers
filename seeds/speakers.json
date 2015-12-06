@@ -1,4 +1,4 @@
-{  "email": "pompaalarconrawls@gmail.com",    "name": {    "first": "ANA",     "last": "Pompa Alarcon Rawls"}  }
-{  "email": "grace@hopper.com",               "name": {    "first": "Grace",   "last": "Hopper"}               }
-{  "email": "linus@torvalds.com",             "name": {    "first": "Linus",   "last": "Torvalds"}             }
-{  "email": "ada@lovelace.com",               "name": {    "first": "Ada",     "last": "Lovelace"}             }
+{  "email": "pompaalarconrawls@gmail.com",    "first_name": "ANA",     "last_name": "Pompa Alarcon Rawls"}
+{  "email": "grace@hopper.com",               "first_name": "Grace",   "last_name": "Hopper"}
+{  "email": "linus@torvalds.com",             "first_name": "Linus",   "last_name": "Torvalds"}
+{  "email": "ada@lovelace.com",               "first_name": "Ada",     "last_name": "Lovelace"}

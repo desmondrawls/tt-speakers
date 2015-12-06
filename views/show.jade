@@ -5,20 +5,20 @@ html(lang="en")
         script(src="/jquery/jquery.js")
         link(rel='stylesheet', href='/stylesheets/main.css')
     body
-        h1= speaker.name.first + ' ' + speaker.name.last
+        h1= speaker.first_name + ' ' + speaker.last_name
         div.nav
             a(href='/')= "Back to Speakers List"
 
         dl
             dt= "First Name"
-                dd.view= speaker.name.first
+                dd.view= speaker.first_name
                 dd.edit
-                    input#first-name(type="text" value= speaker.name.first)
+                    input#first-name(type="text" value= speaker.first_name)
             br
             dt= "Last Name"
-                dd.view= speaker.name.last
+                dd.view= speaker.last_name
                 dd.edit
-                    input#last-name(type="text" value= speaker.name.last)
+                    input#last-name(type="text" value= speaker.last_name)
             br
             dt= "Email"
                 dd.view= speaker.email
@@ -52,12 +52,9 @@ html(lang="en")
                 $.ajax('/' + speakerId, {
                     method: 'PUT',
                     data: {
-                        speakerId: speakerId,
                         email: $('#email').val(),
-                        name:{
-                            first: $('#first-name').val(),
-                            last: $('#last-name').val(),
-                        }
+                        first_name: $('#first-name').val(),
+                        last_name: $('#last-name').val()
                     },
                     complete: function () {
                         cancel()
