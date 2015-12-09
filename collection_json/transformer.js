@@ -24,9 +24,9 @@ function layout(items) {
 
             template: {
                 data: [
-                    {name: 'first-name', value: '', prompt: 'First name'},
-                    {name: 'last-name', value: '', prompt: 'Last name'},
-                    {name: 'email', value: '', prompt: 'Email'},
+                    {name: 'first_name', value: '', prompt: 'First Name'},
+                    {name: 'last_name', value: '', prompt: 'Last Name'},
+                    {name: 'email', value: '', prompt: 'Email'}
                 ]
             }
 
