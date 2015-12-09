@@ -1,6 +1,7 @@
 var express = require('express')
 var helpers = require('./helpers')
 var jsonTemplates = require('./collection_json/transformer')
+var jsonTranslater = require('./collection_json/translater')
 
 var router = express.Router({
     mergeParams: true
@@ -22,9 +23,22 @@ router.get('/', function(req, res){
 })
 
 router.post('/', function(req, res){
-    new Speaker(req.body).save()
-    res.redirect('/')
+    console.log("creating new speaker with ", req.body)
+    var speaker = jsonTranslater.speakerFromTemplateObject(req.body)
+    new Speaker(speaker).save()
+    respondWithRedirect(res, '/')
 })
+
+function respondWithRedirect(res, path) {
+    res.format({
+        html: function() {
+            res.redirect('/')
+        },
+        json: function() {
+            res.status(201).send("")
+        }
+    })
+}
 
 function respondWithSpeakers(res, speakers) {
     res.format({
@@ -32,7 +46,7 @@ function respondWithSpeakers(res, speakers) {
             res.render('index', {speakers: speakers})
         },
         json: function () {
-            res.send(JSON.stringify(jsonTemplates.layout(jsonTemplates.speakers(speakers))))
+            res.json(jsonTemplates.layout(jsonTemplates.speakers(speakers)))
         }
     })
 }

@@ -47,14 +47,22 @@ html(lang="en")
                 console.log("saving")
                 $.ajax('/', {
                     method: 'POST',
-                    data: {
-                        email: $('#email').val(),
-                        first_name: $('#first-name').val(),
-                        last_name: $('#last-name').val()
-                    },
+                    data: speakerTemplate(),
                     complete: function () {
                         cancel()
                         location.reload()
                     }
                 })
+            }
+
+            function speakerTemplate() {
+                return {
+                    'template': {
+                        'data': [
+                            {'name': 'email', 'prompt': 'Email', 'value': $('#email').val()},
+                            {'name': 'first_name', 'prompt': 'First Name', 'value': $('#first-name').val()},
+                            {'name': 'last_name', 'prompt': 'Last Name', 'value': $('#last-name').val()}
+                        ]
+                    }
+                }
             }
