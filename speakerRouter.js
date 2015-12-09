@@ -25,7 +25,7 @@ router.get('/', helpers.verifySpeaker, function (req, res) {
 
 router.put('/', function (req, res) {
     console.log("updating with ", req.body)
-    var speaker = jsonTranslater.speakers(req.body)[0]
+    var speaker = jsonTranslater.speakerFromTemplateObject(req.body)
     Speaker.findByIdAndUpdate(req.params.id, speaker, {new: true}, function (err, speaker) {
         //THIS IS THE OLD SPEAKER NOT THE UPDATED ONE
         respondWithSpeaker(res, speaker)

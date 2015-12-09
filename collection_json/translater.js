@@ -1,14 +1,14 @@
 var _ = require('lodash')
 
-function speakers(body) {
-    return _.map(body.collection.items, function(item){
-        return speaker(item)
+function speakers(collectionObject) {
+    return _.map(collectionObject.collection.items, function(item){
+        return speakerFromAttributes(item.data)
     })
 }
 
-function speaker(item){
+function speakerFromAttributes(attributes){
     var speaker = {}
-    _.each(item.data, function(attribute){
+    _.each(attributes, function(attribute){
         if(attribute.name != 'id'){
             speaker[attribute.name] = attribute.value
         }
@@ -16,4 +16,13 @@ function speaker(item){
     return speaker
 }
 
+function templateAttributes(templateObject){
+    return templateObject.template.data
+}
+
+function speakerFromTemplateObject(templateObject){
+    return speakerFromAttributes(templateAttributes(templateObject))
+}
+
 exports.speakers = speakers
+exports.speakerFromTemplateObject = speakerFromTemplateObject

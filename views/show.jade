@@ -48,26 +48,26 @@ html(lang="en")
             }
 
             function save(speakerId) {
-                var updatedSpeaker =
-                    [
-                        {name: 'email', prompt: 'Email', value: $('#email').val()},
-                        {name: 'first-name', prompt: 'First Name', value: $('#first-name').val()},
-                        {name: 'last-name', prompt: 'Last Name', value: $('#last-name').val()}
-                    ]
-                console.log("saving")
-                console.log('update', updatedSpeaker)
                 $.ajax('/' + speakerId, {
                     method: 'PUT',
-                    data: {
-                        'email': 'email',
-                        'first_name': 'first',
-                        'last_name': 'last'
-                    },
+                    data: speakerTemplate(),
                     complete: function () {
                         cancel()
                         location.reload()
                     }
                 })
+            }
+
+            function speakerTemplate() {
+                return {
+                    'template': {
+                        'data': [
+                            {'name': 'email', 'prompt': 'Email', 'value': $('#email').val()},
+                            {'name': 'first_name', 'prompt': 'First Name', 'value': $('#first-name').val()},
+                            {'name': 'last_name', 'prompt': 'Last Name', 'value': $('#last-name').val()}
+                        ]
+                    }
+                }
             }
             function drop(speakerId) {
                     $.ajax('/' + speakerId, {
