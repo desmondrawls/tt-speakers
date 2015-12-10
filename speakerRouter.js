@@ -44,7 +44,7 @@ function respondWithSpeaker(res, speaker) {
             res.render('show', {speaker: speaker})
         },
         json: function () {
-            res.send(JSON.stringify(jsonTransformer.layout(jsonTransformer.speakers([speaker]))))
+            res.send(JSON.stringify(jsonTransformer.layout('http://localhost:3000/' + speaker.id, jsonTransformer.speakers([speaker]))))
         }
     })
 }

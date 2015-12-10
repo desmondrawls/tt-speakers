@@ -46,7 +46,7 @@ function respondWithSpeakers(res, speakers) {
             res.render('index', {speakers: speakers})
         },
         json: function () {
-            res.json(jsonTemplates.layout(jsonTemplates.speakers(speakers)))
+            res.json(jsonTemplates.layout('http://localhost:3000/', jsonTemplates.speakers(speakers)))
         }
     })
 }

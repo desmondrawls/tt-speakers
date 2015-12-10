@@ -1,11 +1,11 @@
 var _ = require('lodash')
 
-function layout(items) {
+function layout(url, items) {
     return (
     {
         collection: {
             version: '1.0',
-            href: 'http://localhost:3000/',
+            href: url,
 
             links: [
                 {rel: 'index', href: 'http://localhost:3000/'}
